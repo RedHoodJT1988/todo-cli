@@ -8,8 +8,8 @@ import (
 	"github.com/RedHoodJT1988/todo-cli"
 )
 
-// Hardcoding the file name
-const todoFileName = ".todo.json"
+// Default file name
+var todoFileName = ".todo.json"
 
 func main() {
 	// Testing out the Usage function
@@ -26,6 +26,11 @@ func main() {
 	complete := flag.Int("complete", 0, "Item to be completed")
 
 	flag.Parse()
+
+	// Check if the ser defined the ENV VAR for custom file name
+	if os.Getenv("TODO_FILENAME") != "" {
+		todoFileName = os.Getenv("TODO_FILENAME")
+	}
 
 	// Define an item list
 	l := &todo.List{}
