@@ -40,11 +40,7 @@ func main() {
 	switch {
 	case *list:
 		// List current to do items
-		for _, item := range *l {
-			if !item.Done {
-				fmt.Println(item.Task)
-			}
-		}
+		fmt.Print(l)
 	case *complete > 0:
 		// Complete the Given item
 		if err := l.Complete(*complete); err != nil {
@@ -67,14 +63,6 @@ func main() {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
-
-		// For no extra arguments, print the list
-	case len(os.Args) == 1:
-		for _, item := range *l {
-			fmt.Println(item.Task)
-		}
-		// Concatenate all provided arguments with a space and 
-		// add to the list as an item
 	default:
 		// Invalid flag provided
 		fmt.Fprintln(os.Stderr, "Invalid option")
